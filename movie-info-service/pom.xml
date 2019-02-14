@@ -21,6 +21,7 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
     </properties>
 
     <dependencies>
@@ -35,6 +36,12 @@
             <scope>test</scope>
         </dependency>
 
+        <!--EUREKA-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+
         <!--UTILS-->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -47,6 +54,18 @@
             <version>23.0</version>
         </dependency>
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <plugins>
