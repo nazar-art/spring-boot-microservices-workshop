@@ -1,4 +1,4 @@
-package io.javabrains.moviecatalogservice.models;
+package io.javabrains.movieinfoservice.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Movie {
-    private String movieId;
-    private String name;
-    private String description;
+public class MovieSummary {
+    private String id;
+    private String title;
+    private String overview;
 }

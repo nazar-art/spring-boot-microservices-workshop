@@ -28,14 +28,16 @@ public class MovieCatalogResource {
     public List<CatalogItem> getCatalog(@PathVariable("userId") String userId) {
 
         UserRating ratings = restTemplate
-                .getForObject("http://localhost:8083/ratingsdata/users/" + userId, UserRating.class);
+                .getForObject("http://ratings-data-service/ratingsdata/users/" + userId, UserRating.class);
+//                .getForObject("http://localhost:8083/ratingsdata/users/" + userId, UserRating.class);
 
         return ratings.getUserRating().stream()
                 .map(rating -> {
                     // For each movie ID call movie info service and get details
                     Movie movie = restTemplate
-                            .getForObject("http://localhost:8082/movies/" + rating.getMovieId(), Movie.class);
+                            .getForObject("http://movie-info-service/movies/" + rating.getMovieId(), Movie.class);
 
+                    // example for usage with reactive web client
                     /*Movie movie = webClientBuilder.build()
                             .get()
                             .uri("http://localhost:8082/movies/" + rating.getMovieId())
@@ -44,7 +46,7 @@ public class MovieCatalogResource {
                             .block();*/
 
                     // put them all together
-                    return new CatalogItem(movie.getName(), "Desc", rating.getRating());
+                    return new CatalogItem(movie.getName(), movie.getDescription(), rating.getRating());
                 })
                 .collect(Collectors.toList());
 
